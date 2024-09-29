@@ -1,0 +1,7 @@
+{
+  "name": "QuickDineHub-Movil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
