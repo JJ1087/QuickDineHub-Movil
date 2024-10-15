@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
 
 @Component({
   selector: 'app-tab1',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  @ViewChild('quickview') quickview!: ProductQuickviewComponent;
 
   constructor() {}
 
