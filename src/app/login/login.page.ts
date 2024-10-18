@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
   }
 
   irAlCatalogo(){
-    this.router.navigate(['/tab1']);
+    this.router.navigate(['/tabs']);
   }
 
 }
