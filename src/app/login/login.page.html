@@ -1,63 +1,59 @@
 <ion-content [fullscreen]="true">
-
-  <div class="h-screen flex justify-center items-center px-4 sm:px-0">
-    <div class="w-full max-w-md bg-white rounded-lg p-8">
-      <img src="assets/icon/logo-empresa.png" alt="Logotipo de QuickDineHub" class="w-32 sm:w-40 h-auto mb-6 mx-auto">
-      <h2 class="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
+  <div class="min-h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md bg-white rounded-lg p-6 sm:p-8 md:p-10 lg:max-w-lg lg:p-12">
+      <img src="assets/icon/logo-empresa.png" alt="Logotipo de QuickDineHub" class="w-28 sm:w-32 md:w-40 h-auto mb-4 mx-auto">
       
-      <form class="space-y-6">
+      <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-5">
+        
         <!-- Campo de Correo Electrónico -->
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+          <label for="email" class="block text-sm md:text-base font-medium text-gray-700">Correo Electrónico</label>
           <input
             type="email"
             id="email"
-            name="email"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#ff8633] sm:text-sm"
+            formControlName="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#ff8633] sm:text-sm md:text-base"
             placeholder="tucorreo@ejemplo.com"
           />
+          <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="flex items-center mt-1 text-red-600 text-sm md:text-base">
+            <ion-icon name="alert-circle" class="mr-1"></ion-icon>
+            <ng-container *ngIf="email?.errors?.['required']">Correo Electrónico es obligatorio</ng-container>
+            <ng-container *ngIf="email?.errors?.['email']">Correo Electrónico no válido</ng-container>
+          </small>
         </div>
   
         <!-- Campo de Contraseña -->
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#ff8633] sm:text-sm"
-            placeholder="********"
-          />
+          <label for="password" class="block text-sm md:text-base font-medium text-gray-700">Contraseña</label>
+          <div class="relative">
+            <input
+              [type]="hidePassword ? 'password' : 'text'"
+              id="password"
+              formControlName="password"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#ff8633] sm:text-sm md:text-base"
+              placeholder="********"
+            />
+            <ion-icon name="{{ hidePassword ? 'eye-off' : 'eye' }}" (click)="togglePasswordVisibility()" class="absolute right-3 top-3 cursor-pointer text-gray-500"></ion-icon>
+          </div>
+          <small *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="flex items-center mt-1 text-red-600 text-sm md:text-base">
+            <ion-icon name="alert-circle" class="mr-1"></ion-icon>
+            Contraseña es obligatoria
+          </small>
         </div>
   
         <!-- Botón de Iniciar Sesión -->
-        <!-- type="submit" -->
         <div>
           <button
-          
-            type="button"
-            class="w-full bg-[#ff8633] text-white px-4 py-2 rounded-lg hover:bg-[#ff6133] focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:ring-offset-2"
-            (click)="irAlCatalogo()"
+            type="submit"
+            [disabled]="loginForm.invalid"
+            class="w-full bg-[#ff8633] text-white px-4 py-2 rounded-lg hover:bg-[#ff6133] focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:ring-offset-2 text-sm md:text-base lg:text-lg"
           >
             Iniciar Sesión
           </button>
         </div>
-
-         <!-- Nota de O inicia sesión con -->
-         <div class="text-center text-gray-500 text-sm mt-4">
-          O inicia sesión con
-        </div>
-
-        <!-- Logotipo de Google -->
-        <div class="flex justify-center mt-4">
-          <img src="assets/icon/logo-google.png" alt="Iniciar sesión con Google" class="w-6 sm:w-7 h-auto cursor-pointer">
-        </div>
-
-
       </form>
     </div>
   </div>
-  
-
 </ion-content>
-
