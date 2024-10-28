@@ -53,7 +53,7 @@ jobs:
       # 7. Ejecutar pruebas lint
       - name: Run lint test
         run: npm run lint
-      
-      # # 8. Ejecutar pruebas e2e con cypress
-      # - name: e2e cypress
-      #   run: npx cypress run
+
+      # 8. Ejecutar pruebas e2e con cypress
+      - name: e2e cypress
+        run: npx cypress run
