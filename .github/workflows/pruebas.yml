@@ -48,7 +48,7 @@ jobs:
 
       # 6. Ejecutar pruebas unitarias con Jasmin y Karma
       - name: Run unit test Jasmine karma tests
-        run: ng test --no-watch --no-progress --browsers=ChromeHeadless
+        run: npm test --no-watch --no-progress --browsers=ChromeHeadless
 
       # # 7. Ejecutar pruebas lint
       # - name: Run lint
