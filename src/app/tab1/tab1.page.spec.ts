@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab1Page } from './tab1.page';
+import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
+
 
 describe('Tab1Page', () => {
   let component: Tab1Page;
@@ -11,7 +11,7 @@ describe('Tab1Page', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Tab1Page],
+      declarations: [Tab1Page, ProductQuickviewComponent],
       imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
     }).compileComponents();
 
