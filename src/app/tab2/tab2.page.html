@@ -17,105 +17,22 @@
   <!-- Lista de productos en el carrito (Ajustada para no ocupar toda la pantalla) -->
   <div class="flex-grow px-4 py-2 overflow-y-auto mb-48"> <!-- Ajustamos con 'mb-24' para dejar espacio al resumen -->
     <!-- Producto 1 -->
-    <div class="bg-white shadow-lg rounded-lg flex justify-between items-center p-4 mb-4 space-x-4 sm:space-x-6 md:space-x-8">
-      <img src="assets/icon/tostadas.jpg" alt="Tostadas" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg">
+    <div *ngFor="let producto of productosCarrito" class="bg-white shadow-lg rounded-lg flex justify-between items-center p-4 mb-4 space-x-4 sm:space-x-6 md:space-x-8">
+      <img [src]="getImageUrl(producto.imagen[0])" alt="{{producto.nombreProducto}}" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg">
       <div class="flex-grow px-2 sm:px-4">
-        <h2 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900">Tostadas</h2>
-        <p class="text-sm sm:text-md md:text-lg text-gray-700">Subtotal: $60</p>
+        <h2 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900">{{producto.nombreProducto}}</h2>
+        <p class="text-sm sm:text-md md:text-lg text-gray-700">Subtotal: ${{ producto.subtotal }}</p>
       </div>
       <div class="flex items-center space-x-1 sm:space-x-2">
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
+        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]" (click)="actualizarCantidad('-', producto.productId, producto.cantidad)">
           <ion-icon name="remove-circle-outline"></ion-icon>
         </button>
-        <span class="text-sm sm:text-lg font-semibold">2</span>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
+        <span class="text-sm sm:text-lg font-semibold">{{ producto.cantidad }}</span>
+        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]" (click)="actualizarCantidad('+', producto.productId, producto.cantidad)">
           <ion-icon name="add-circle-outline"></ion-icon>
         </button>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="trash-outline"></ion-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- Producto 1 -->
-    <div class="bg-white shadow-lg rounded-lg flex justify-between items-center p-4 mb-4 space-x-4 sm:space-x-6 md:space-x-8">
-      <img src="assets/icon/tostadas.jpg" alt="Tostadas" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg">
-      <div class="flex-grow px-2 sm:px-4">
-        <h2 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900">Tostadas</h2>
-        <p class="text-sm sm:text-md md:text-lg text-gray-700">Subtotal: $60</p>
-      </div>
-      <div class="flex items-center space-x-1 sm:space-x-2">
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="remove-circle-outline"></ion-icon>
-        </button>
-        <span class="text-sm sm:text-lg font-semibold">2</span>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="trash-outline"></ion-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- Producto 1 -->
-    <div class="bg-white shadow-lg rounded-lg flex justify-between items-center p-4 mb-4 space-x-4 sm:space-x-6 md:space-x-8">
-      <img src="assets/icon/tostadas.jpg" alt="Tostadas" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg">
-      <div class="flex-grow px-2 sm:px-4">
-        <h2 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900">Tostadas</h2>
-        <p class="text-sm sm:text-md md:text-lg text-gray-700">Subtotal: $60</p>
-      </div>
-      <div class="flex items-center space-x-1 sm:space-x-2">
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="remove-circle-outline"></ion-icon>
-        </button>
-        <span class="text-sm sm:text-lg font-semibold">2</span>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="trash-outline"></ion-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- Producto 1 -->
-    <div class="bg-white shadow-lg rounded-lg flex justify-between items-center p-4 mb-4 space-x-4 sm:space-x-6 md:space-x-8">
-      <img src="assets/icon/tostadas.jpg" alt="Tostadas" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg">
-      <div class="flex-grow px-2 sm:px-4">
-        <h2 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900">Tostadas</h2>
-        <p class="text-sm sm:text-md md:text-lg text-gray-700">Subtotal: $60</p>
-      </div>
-      <div class="flex items-center space-x-1 sm:space-x-2">
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="remove-circle-outline"></ion-icon>
-        </button>
-        <span class="text-sm sm:text-lg font-semibold">2</span>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="trash-outline"></ion-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- Producto 2 -->
-    <div class="bg-white shadow-lg rounded-lg flex justify-between items-center p-4 mb-4 space-x-4 sm:space-x-6 md:space-x-8">
-      <img src="assets/icon/tostadas.jpg" alt="Tostadas" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg">
-      <div class="flex-grow px-2 sm:px-4">
-        <h2 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900">Tostadas</h2>
-        <p class="text-sm sm:text-md md:text-lg text-gray-700">Subtotal: $60</p>
-      </div>
-      <div class="flex items-center space-x-1 sm:space-x-2">
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="remove-circle-outline"></ion-icon>
-        </button>
-        <span class="text-sm sm:text-lg font-semibold">2</span>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>
-        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]">
+        <button class="bg-[#ff8633] text-white px-1 sm:px-2 py-1 rounded hover:bg-[#ff6133]"
+          (click)="eliminarDeCarrito(producto.productId)">
           <ion-icon name="trash-outline"></ion-icon>
         </button>
       </div>
@@ -128,7 +45,7 @@
     <div class="bg-white p-2 sm:p-4 md:p-6 rounded-lg shadow-md">
       <div class="flex justify-between">
         <span class="text-gray-700 text-sm sm:text-base md:text-lg">Subtotal</span>
-        <span class="font-semibold text-sm sm:text-base md:text-lg">$225</span>
+        <span class="font-semibold text-sm sm:text-base md:text-lg">${{subtotalCompra}}</span>
       </div>
       <div class="flex justify-between">
         <span class="text-gray-700 text-sm sm:text-base md:text-lg">Envío</span>
@@ -136,13 +53,15 @@
       </div>
       <div class="flex justify-between font-bold text-gray-900 text-sm sm:text-base md:text-lg">
         <span>Total</span>
-        <span>$255</span>
+        <span>${{totalCompra}}</span>
       </div>
     </div>
-    <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 mt-3 rounded hover:bg-[#ff6133]">
+    <button (click)="quickview.openModal()" class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 mt-3 rounded hover:bg-[#ff6133]">
       Comprar
     </button>
+    <!-- Product Quickviews "detalles del producto" -->
+    <app-pasarela-pagos #quickview [totalCompra]="totalCompra"></app-pasarela-pagos>
   </div>
-
+  
 
 </ion-content>

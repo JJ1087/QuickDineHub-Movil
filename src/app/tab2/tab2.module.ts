@@ -7,6 +7,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
+import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pagos.component';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -15,6 +17,10 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     ExploreContainerComponentModule,
     Tab2PageRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [
+    Tab2Page,
+    PasarelaPagosComponent
+
+  ]
 })
 export class Tab2PageModule {}

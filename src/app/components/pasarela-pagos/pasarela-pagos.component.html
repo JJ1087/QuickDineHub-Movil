@@ -1,0 +1,54 @@
+<div class="relative z-10" role="dialog" aria-modal="true" *ngIf="isVisible">
+  <!-- Fondo difuminado -->
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto flex justify-center items-center p-4 sm:p-6 md:p-8">
+    <!-- Panel del Modal -->
+    <div class="relative bg-white rounded-lg shadow-2xl p-4 sm:p-6 md:p-8 max-w-xs sm:max-w-md md:max-w-lg w-full mx-4 sm:mx-auto">
+      <!-- Botón de cerrar -->
+      <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500" (click)="closeModal()">
+        <span class="sr-only">Cerrar</span>
+        <ion-icon name="close-outline" class="text-2xl"></ion-icon>
+      </button>
+
+      <!-- Contenido del modal -->
+      <div class="text-center">
+        <!-- Encabezado -->
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1">Paga tu compra</h2>
+
+        <!-- Selección de dirección -->
+        <p class="text-gray-500 mb-4 text-sm sm:text-base">Selecciona tu dirección</p>
+
+        <!-- Combobox para seleccionar dirección -->
+        <select class="w-full border border-[#ff8633] text-gray-900 p-2 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6133]"
+                [(ngModel)]="coloniaSeleccionada" (change)="seleccionarDireccion()">
+          <option *ngFor="let direccion of direcciones" 
+                  [ngValue]="{ colonia: direccion.colonia, idDireccion: direccion._id }">
+            {{ direccion.colonia }}, {{ direccion.calle }}, {{ direccion.noCasa }}, ({{ direccion.datoExtra }})
+          </option>
+        </select>
+
+        <!-- Total -->
+        <p class="text-gray-500 mb-4 text-sm sm:text-base">Paga el total del carrito</p>
+        <p class="text-lg font-semibold text-gray-900 mb-6">Total: ${{ totalCompra }}</p>
+
+        <!-- Botones de pago -->
+        <div class="space-y-2">
+          <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 rounded hover:bg-[#ff6133]">
+            Pagar con tarjeta de crédito
+          </button>
+          <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 rounded hover:bg-[#ff6133]">
+            Pagar con tarjeta de crédito/débito
+          </button>
+          <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 rounded hover:bg-[#ff6133]">
+            Pagar con Apple Pay
+          </button>
+          <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 rounded hover:bg-[#ff6133]">
+            Pagar con Google Play
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
-import { quickviewService } from './quickview.service';
+import { quickviewService  } from './quickview.service';
 
 @Component({
   selector: 'app-product-quickview',
@@ -19,15 +19,17 @@ export class ProductQuickviewComponent  implements OnInit {
 
   constructor(private authService: quickviewService) { }
 
+  //Carga de inicio-----------------------------------------------------
+
   ngOnInit() {}
 
-  
+
 
   openModal(productId: string) {//Recibimos el id
     this.isVisible = true;
     this.loadProduct(productId);
   }
-
+  
   closeModal() {
     this.isVisible = false;
   }
