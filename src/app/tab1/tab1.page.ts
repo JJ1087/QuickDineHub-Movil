@@ -61,7 +61,7 @@ export class Tab1Page implements OnInit{
 
   //--------------------Obtencion de los productos--------------------
   cargarProductos(): void {
-    this.presentLoading();
+    //this.presentLoading();
     this.catalogoService.obtenerProductos().subscribe(
       (productos: Product[]) => {
         this.dismissLoading();
