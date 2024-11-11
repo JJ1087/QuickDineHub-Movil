@@ -31,7 +31,7 @@
         <!-- Total -->
         <p class="text-gray-500 mb-4 text-sm sm:text-base">Paga el total del carrito</p>
         <p class="text-lg font-semibold text-gray-900 mb-6">Total: ${{ totalCompra }}</p>
-
+        Stripe
         <!-- Botones de pago -->
         <div class="space-y-2">
           <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 rounded hover:bg-[#ff6133]">
@@ -46,9 +46,13 @@
           <button class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 rounded hover:bg-[#ff6133]">
             Pagar con Google Play
           </button>
+          Stripe
           <ion-button expand="block" class="ion-margin-top" (click)="paymentSheet()">Pagar con tarjeta de credito</ion-button>
-           <!-- <ion-button expand="block" class="ion-margin-top" (click)="paymentFlow()">Pagar con tarjeta de credito/debito</ion-button> -->
+          <ion-button expand="block" class="ion-margin-top" (click)="paymentFlow()">Pagar con tarjeta flow</ion-button>
+
           <ion-button expand="block" class="ion-margin-top" (click)="googlePay()">Pagar con Google Play</ion-button>
+
+
         </div>
       </div>
     </div>
