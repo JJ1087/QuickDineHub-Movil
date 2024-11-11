@@ -5,10 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { first, lastValueFrom } from 'rxjs';
 
-import { ApplePayEventsEnum, GooglePayEventsEnum, PaymentFlowEventsEnum, PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
-import { first, lastValueFrom } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-pasarela-pagos',
@@ -215,97 +212,6 @@ export class PasarelaPagosComponent  implements OnInit {
   }
 
   
-//Funcion de metodo de PAGO stripe-----------------------------------
-  httpPost(body) {
-    return this.http.post<any>(environment.api + 'payment-sheet', body).pipe(first());
-  }
 
-
-//----------------------------------
-  async googlePay() {
-    const isAvailable = Stripe.isGooglePayAvailable().catch(() => undefined);
-    if (isAvailable === undefined) {
-      return;
-    }
-  
-    Stripe.addListener(GooglePayEventsEnum.Completed, () => {
-      console.log('GooglePayEventsEnum.Completed');
-    });
-    
-    const data$ = this.httpPost(this.data);
-
-    const { paymentIntent } = await lastValueFrom(data$);
-
-    await Stripe.createGooglePay({
-      paymentIntentClientSecret: paymentIntent,
-
-      paymentSummaryItems: [{
-        label: 'Esau',
-        amount: 1099.00
-      }],
-      merchantIdentifier: 'Esau',
-      countryCode: 'MX',
-      currency: 'MXN',
-    });
-
-    const result = await Stripe.presentGooglePay();
-    if (result.paymentResult === GooglePayEventsEnum.Completed) {
-      this.splitAndJoin(paymentIntent);
-    }
-  }
-
- splitAndJoin(paymentIntent) {
-   const result = paymentIntent.split('').slice(0, 2).join('');
-   console.log(result);
-   return result;
- }
- 
-  
- async paymentSheet() {
-  if (!this.data.amount) {
-    console.error('Error: datos de pago incompletos');
-    return;
-  }
-
-  try {
-    Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
-      console.log('PaymentSheetEventsEnum.Completed');
-    });
-
-    const data$ = this.httpPost(this.data);
-    console.log(data$)
-    const { paymentIntent, ephemeralKey, customer } = await lastValueFrom(data$);
-
-    const response = await lastValueFrom(data$);
-    console.log('Backend response:', response);
-    console.log(paymentIntent, 'ephemeral', ephemeralKey, 'customer',customer)
-    if (!paymentIntent || !ephemeralKey || !customer) {
-      console.error('Faltan datos de pago:', { paymentIntent, ephemeralKey, customer });
-      return;
-    }
-    try {
-      await Stripe.createPaymentSheet({
-        paymentIntentClientSecret: paymentIntent,
-        customerId: customer,
-        customerEphemeralKeySecret: ephemeralKey,
-        merchantDisplayName: 'QuickDH',
-      });
-    } catch (error) {
-      console.error('Error en createPaymentSheet:', error);
-      return; // Termina la función si hay un error
-    }
-    
-    
-
-    
-    const result = await Stripe.presentPaymentSheet();
-    if (result && result.paymentResult === PaymentSheetEventsEnum.Completed) {
-      this.splitAndJoin(paymentIntent);
-     
-    }
-  } catch (e) {
-    console.log(e);
-  }
-}
 
 }
