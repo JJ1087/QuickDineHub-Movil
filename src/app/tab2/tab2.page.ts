@@ -3,6 +3,9 @@ import { CarritoService } from './carrito.service';
 import { ToastController, LoadingController } from '@ionic/angular'; // Para mostrar mensajes emergentes
 import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pagos.component';
 
+
+
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -15,11 +18,13 @@ export class Tab2Page implements OnInit{
   //isLoading = false; // Variable inicial de la animacion de carga
   subtotalCompra: number = 0;
   totalCompra: number = 0;
+  
 
   constructor(
     private carritoService: CarritoService,
     private toastController: ToastController,
     private loadingController: LoadingController // Inyectar el controlador de Loading
+    
   ) {}
 
   //-----------Mensajes emergentes--------------------
@@ -121,6 +126,7 @@ export class Tab2Page implements OnInit{
     this.subtotalCompra = this.productosCarrito.reduce((acc, producto) => acc + producto.subtotal, 0);
     this.totalCompra = this.subtotalCompra + 30;
   }
-  
+
+
  
 }

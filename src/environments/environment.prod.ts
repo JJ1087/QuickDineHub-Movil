@@ -6,3 +6,4 @@ export const environment = {
   },
   api:'https://quickdinehub-back1.onrender.com/'
 };
+

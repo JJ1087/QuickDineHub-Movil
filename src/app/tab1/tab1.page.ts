@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
 import { CatalogoService, Product } from './catalogo.service';
+import { Preferences } from '@capacitor/preferences';
 
 import {ToastController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -17,12 +19,14 @@ export class Tab1Page implements OnInit{
   searchTerm: string = ''; //almacenar el término de búsqueda
   selectedFilter: string = 'Todo'; //Filtro por defecto
   isLoading = false; // Variable inicial de la animacion de carga
+  userName: string = '';
   
 
   constructor(
     private catalogoService: CatalogoService,
     private loadingController: LoadingController, // Inyectar el controlador de Loading
-    private toastController: ToastController // Inyectar el controlador de Toast
+    private toastController: ToastController, // Inyectar el controlador de Toast
+    private router: Router
   ) {}
 
 
@@ -50,6 +54,7 @@ export class Tab1Page implements OnInit{
   }
 //-----Carga inicial---------------------------------------------
   ngOnInit(): void {
+    this.cargarNombreUsuario();
     this.cargarProductos();
     this.cargarCarritoComensal();
   }
@@ -59,6 +64,19 @@ export class Tab1Page implements OnInit{
     this.cargarCarritoComensal();
   }
 
+  //Elementos de perfil de usuario---------------------------------------
+  
+  async cargarNombreUsuario(): Promise<void> {
+    const { value } = await Preferences.get({ key: 'userName' });
+    if (value) {
+      this.userName = value;
+    }
+  }
+
+  irAPerfilUsuario() {
+    this.router.navigate(['/perfil-usuario']);
+  }
+  
   //--------------------Obtencion de los productos--------------------
   cargarProductos(): void {
     //this.presentLoading();

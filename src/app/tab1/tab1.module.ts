@@ -9,6 +9,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
 
+
 @NgModule({
   imports: [
     IonicModule,
@@ -19,7 +20,8 @@ import { ProductQuickviewComponent } from '../components/product-quickview/produ
   ],
   declarations: [
     Tab1Page,
-    ProductQuickviewComponent
+    ProductQuickviewComponent,
+
   
   ]
 })

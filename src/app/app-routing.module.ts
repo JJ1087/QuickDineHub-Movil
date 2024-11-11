@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: '',  // Si rellenas este path la ruta deja de funcionar, enigma de la vida. 
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'perfil-usuario',
+    loadChildren: () => import('./perfil-usuario/perfil-usuario-routing.module').then(m => m.PerfilUsuarioRoutingModule)
   }
 ];
 
