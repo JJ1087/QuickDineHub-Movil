@@ -8,6 +8,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
 import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pagos.component';
+import { FeedbackFormularioComponent } from '../components/feedback-formulario/feedback-formulario.component';
+
 
 @NgModule({
   imports: [
@@ -19,8 +21,8 @@ import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pa
   ],
   declarations: [
     Tab2Page,
-    PasarelaPagosComponent
-
+    PasarelaPagosComponent,
+    FeedbackFormularioComponent
   ]
 })
 export class Tab2PageModule {}

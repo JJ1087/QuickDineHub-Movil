@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
 import { PerfilUsuarioComponent } from '../perfil-usuario/perfil-usuario.component';
+//import { FeedbackFormularioComponent } from '../components/feedback-formulario/feedback-formulario.component';
 import { CatalogoService, Product } from './catalogo.service';
 import { Preferences } from '@capacitor/preferences';
 
 import {ToastController, LoadingController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tab1',
@@ -14,6 +16,8 @@ import {ToastController, LoadingController } from '@ionic/angular';
 export class Tab1Page implements OnInit{
   @ViewChild('quickview') quickview!: ProductQuickviewComponent;
   @ViewChild('usuario') usuario!: PerfilUsuarioComponent;
+
+  //@ViewChild('feedback') feedback!: FeedbackFormularioComponent;
 
   productos: Product[] = [];
   filteredProductos: Product[] = []; // productos filtrados
@@ -75,7 +79,7 @@ export class Tab1Page implements OnInit{
   
   //--------------------Obtencion de los productos--------------------
   cargarProductos(): void {
-    //this.presentLoading();
+    this.presentLoading();
     this.catalogoService.obtenerProductos().subscribe(
       (productos: Product[]) => {
         this.dismissLoading();

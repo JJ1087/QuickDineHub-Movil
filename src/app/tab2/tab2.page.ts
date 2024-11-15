@@ -3,6 +3,7 @@ import { CarritoService } from './carrito.service';
 import { ToastController, LoadingController } from '@ionic/angular'; // Para mostrar mensajes emergentes
 import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pagos.component';
 import { Preferences } from '@capacitor/preferences';
+import { FeedbackFormularioComponent } from '../components/feedback-formulario/feedback-formulario.component';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class Tab2Page implements OnInit{
   @ViewChild('quickview') quickview!: PasarelaPagosComponent;
-
+  @ViewChild('feedback') feedback!: FeedbackFormularioComponent;
   
   //isLoading = false; // Variable inicial de la animacion de carga
   subtotalCompra: number = 0;
@@ -183,6 +184,12 @@ export class Tab2Page implements OnInit{
     } else {
       console.log('No se esta recibiendo el id del cliente');
     }
+  }
+
+  mostrarModalFeedback(): void {
+    //this.feedbackFormularioVisible = true; // Variable de control para mostrar el modal
+    console.log("Mostrar formulario AFUERITAAAAA");
+    this.feedback.openModal();
   }
  
 }

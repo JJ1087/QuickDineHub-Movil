@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@angular/core';
 import { PasarelaService } from './pasarela.service';
 import { GooglePayEventsEnum, PaymentFlowEventsEnum, PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
 import { environment } from 'src/environments/environment';
@@ -15,9 +15,11 @@ import {ToastController, LoadingController } from '@ionic/angular';
   styleUrls: ['./pasarela-pagos.component.scss'],
 })
 export class PasarelaPagosComponent  implements OnInit {
+  
   @Input() totalCompra: number = 0;
   @Input() carritoConsulta: any[] = [];
   @Output() carritoVaciado = new EventEmitter<void>(); // Emisor de evento
+  @Output() abrirFeedback = new EventEmitter<void>();
   idCliente: string = '';
   isVisible = false;
   data: any ={};
@@ -487,6 +489,20 @@ export class PasarelaPagosComponent  implements OnInit {
           this.botonesDeshabilitados = true;
           this.presentToast('Compra exitosa', 'success');
           this.carritoVaciado.emit(); // Emitir evento
+
+          // Verificar si el cliente ya tiene feedback registrado
+          this.pasarelaService.verificarFeedbackCliente(this.idCliente).subscribe(
+            (feedbackExiste) => {
+              
+              if (!feedbackExiste) {
+                // Mostrar modal de feedback si no existe un feedback previo
+                this.abrirFeedback.emit();
+              }
+            },
+            (error) => {
+              console.error('Error al verificar feedback:', error);
+            }
+          );
           
         },
         (error) => {
