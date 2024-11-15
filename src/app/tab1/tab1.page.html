@@ -3,12 +3,13 @@
     <!-- Contenedor del perfil del cliente -->
     <div class="flex items-center space-x-4 p-2 sm:p-4 md:p-6">
       <!-- Imagen de perfil -->
-      <img src="assets/icon/FotoUsuario.jpg" alt="Foto de perfil" (click)="irAPerfilUsuario()" class="w-[3.5rem] h-[3.5rem] sm:w-[4.5rem] sm:h-[4.5rem] md:w-[5.5rem] md:h-[5.5rem] rounded-full">
+      <img src="assets/icon/FotoUsuario.jpg" alt="Foto de perfil" (click)="usuario.irAPerfilUsuario()" class="w-[3.5rem] h-[3.5rem] sm:w-[4.5rem] sm:h-[4.5rem] md:w-[5.5rem] md:h-[5.5rem] rounded-full">
       
       <!-- Nombre y usuario del cliente -->
       <div>
         <h4 class="text-md sm:text-lg md:text-xl font-semibold text-gray-900">{{userName}}</h4>
       </div>
+      <app-perfil-usuario #usuario></app-perfil-usuario>
     </div>
 
      <!-- Contenedor del encabezado -->

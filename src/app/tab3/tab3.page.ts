@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from './pedidos.service';
 
-
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -17,6 +15,11 @@ export class Tab3Page implements OnInit{
   constructor(private pedidosService: PedidosService) {}
 
   async ngOnInit() {
+    
+  }
+
+  async ionViewWillEnter() {
+   
     try {
       // Cargar órdenes del usuario
       const ordenes$ = await this.pedidosService.obtenerOrdenes();
@@ -35,6 +38,7 @@ export class Tab3Page implements OnInit{
     } catch (error) {
       console.error('Error en la carga inicial:', error);
     }
+    
   }
 
   private async cargarDetallesOrdenes() {
@@ -106,20 +110,6 @@ export class Tab3Page implements OnInit{
       }
     );
   }
-
-  // private async obtenerDetallesProducto() {
-  //   const idsProductos = [...new Set(this.detalleOrdenes.map(detalle => detalle.idProducto))];
-  //   this.pedidosService.obtenerInfoDeProductosPorIds(idsProductos).subscribe(
-  //     (productos: any[]) => {
-  //       this.detalleOrdenes = this.detalleOrdenes.map(detalle => ({
-  //         ...detalle,
-  //         producto: productos.find(prod => prod.id === detalle.idProducto)
-  //       }));
-  //       console.log('Detalles de órdenes con información de productos:', this.detalleOrdenes);
-  //     },
-  //     (error) => console.error('Error al obtener los productos:', error)
-  //   );
-  // }
   
   private async obtenerDetallesProducto() {
     const idsProductos = this.detalleOrdenes.map(detalle => detalle.idProducto);
@@ -127,11 +117,12 @@ export class Tab3Page implements OnInit{
     this.pedidosService.obtenerInfoDeProductosPorIds(idsProductos).subscribe(
         (productos: any[]) => {
             productos.forEach(producto => {
-                // Buscar el detalle de orden correspondiente y asignarle la información del producto
-                const detalle = this.detalleOrdenes.find(det => det.idProducto === producto._id);
-                if (detalle) {
-                    detalle.producto = producto;
-                }
+                // Actualizar todos los detalles de orden que coincidan con el idProducto del producto
+                this.detalleOrdenes.forEach(detalle => {
+                    if (detalle.idProducto === producto._id) {
+                        detalle.producto = producto;
+                    }
+                });
             });
             console.log('Detalles de órdenes con información de productos:', this.detalleOrdenes);
         },
@@ -139,7 +130,8 @@ export class Tab3Page implements OnInit{
             console.error('Error al obtener la información de los productos:', error);
         }
     );
-}
+  }
+
   // Método para generar la URL completa de las imagenes
   getImageUrl(relativePath: string): string {
     return `https://quickdinehub-back1.onrender.com/${relativePath}`;
@@ -148,10 +140,10 @@ export class Tab3Page implements OnInit{
   // Método para obtener el significado de 'estadoOrden'
   obtenerEstado(estadoOrden: number): string {
     switch (estadoOrden) {
-      case 0: return 'Pedido en espera de ser aceptado por el restaurante';
+      case 0: return 'En espera de ser aceptado';
       case 1: return 'Orden rechazada';
       case 2: return '¿Desea continuar con la compra?';
-      case 3: return 'Pedido en espera de ser aceptado por el restaurante';
+      case 3: return 'En espera de ser aceptado';
       case 4: return 'En preparación';
       case 5: return 'Esperando repartidor';
       case 6: return 'Salió de cocina, en camino';
