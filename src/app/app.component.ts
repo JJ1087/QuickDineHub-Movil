@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
       this.router.navigate(['/tabs']);
     } else {
       // Si no existe el token, redirige a la página de inicio de sesión
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'], { replaceUrl: true });
     }
   }
     

@@ -43,5 +43,9 @@ export class CarritoService {
 
     return this.http.put(`${this.apiUrl}/comensales/${userId}/carrito/cantidad`, { productId, cantidad }, { headers }).toPromise();
   }
+
+  obtenerDatoComensal(comensalId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/info-comensalId/${comensalId}`);
+  }
   
 }

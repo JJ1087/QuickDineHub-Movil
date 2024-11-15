@@ -49,18 +49,23 @@
       </div>
       <div class="flex justify-between">
         <span class="text-gray-700 text-sm sm:text-base md:text-lg">Envío</span>
-        <span class="font-semibold text-sm sm:text-base md:text-lg">$30</span>
+        <span class="font-semibold text-sm sm:text-base md:text-lg">${{envio}}</span>
       </div>
       <div class="flex justify-between font-bold text-gray-900 text-sm sm:text-base md:text-lg">
         <span>Total</span>
         <span>${{totalCompra}}</span>
       </div>
     </div>
-    <button (click)="quickview.openModal()" class="w-full bg-[#ff8633] text-white font-bold py-1 sm:py-2 md:py-3 mt-3 rounded hover:bg-[#ff6133]">
-      Comprar
-    </button>
+    <button 
+    (click)="quickview.openModal()" 
+    [disabled]="botonesDeshabilitados"
+    [ngClass]="{'bg-[#ff8633] hover:bg-[#ff6133]': !botonesDeshabilitados, 'bg-[#ff8633]/50': botonesDeshabilitados}" 
+    class="w-full text-white font-bold py-1 sm:py-2 md:py-3 mt-3 rounded">
+    Comprar
+  </button>
+  
     <!-- Product Quickviews "detalles del producto" -->
-    <app-pasarela-pagos #quickview [totalCompra]="totalCompra"></app-pasarela-pagos>
+    <app-pasarela-pagos #quickview [totalCompra]="totalCompra" [carritoConsulta]="carritoConsulta" (carritoVaciado)="cargarProductosCarrito()" (carritoVaciado)="obtenerDatoComensal()"></app-pasarela-pagos>
   </div>
   
 

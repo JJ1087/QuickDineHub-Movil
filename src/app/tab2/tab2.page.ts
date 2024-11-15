@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarritoService } from './carrito.service';
 import { ToastController, LoadingController } from '@ionic/angular'; // Para mostrar mensajes emergentes
 import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pagos.component';
-
-
+import { Preferences } from '@capacitor/preferences';
 
 
 @Component({
@@ -14,16 +13,21 @@ import { PasarelaPagosComponent } from '../components/pasarela-pagos/pasarela-pa
 export class Tab2Page implements OnInit{
   @ViewChild('quickview') quickview!: PasarelaPagosComponent;
 
-  productosCarrito: any [] = [];
+  
   //isLoading = false; // Variable inicial de la animacion de carga
   subtotalCompra: number = 0;
+  envio: number = 0;
   totalCompra: number = 0;
+  productosCarrito: any [] = [];
+  comensalId: string = '';
+  botonesDeshabilitados: boolean = true;
+
   
 
   constructor(
     private carritoService: CarritoService,
     private toastController: ToastController,
-    private loadingController: LoadingController // Inyectar el controlador de Loading
+    private loadingController: LoadingController, // Inyectar el controlador de Loading
     
   ) {}
 
@@ -53,14 +57,23 @@ export class Tab2Page implements OnInit{
   //------Carga inicial----------------------------
 
   ngOnInit() {
-    //this.cargarProductosCarrito();
+    this.cargarUsuario();
   }
   
   ionViewWillEnter() {
     // Este método se ejecuta cada vez que el usuario entra a este tab
     this.cargarProductosCarrito();
+    this.obtenerDatoComensal();
+    
+    
   }
 
+  async cargarUsuario(): Promise<void> {
+    const { value } = await Preferences.get({ key: 'userId' });
+    if (value) {
+      this.comensalId = value;
+    }
+  }
   async cargarProductosCarrito() {
 
     this.presentLoading();
@@ -68,7 +81,9 @@ export class Tab2Page implements OnInit{
       (await this.carritoService.ObtenerProductosCarrito()).subscribe((data) => {
         this.dismissLoading();
         this.productosCarrito = data.carrito;
+        console.log("carrito:", this.productosCarrito);
         this.calcularSubtotal();
+        
         
       });
     } catch (error) {
@@ -124,9 +139,50 @@ export class Tab2Page implements OnInit{
   //----Funciones del componente resumende compra-----------
   calcularSubtotal(): void {
     this.subtotalCompra = this.productosCarrito.reduce((acc, producto) => acc + producto.subtotal, 0);
-    this.totalCompra = this.subtotalCompra + 30;
+    
+    if(this.subtotalCompra < 1){
+      this.envio = 0;
+      this.totalCompra = 0;
+      this.botonesDeshabilitados = true;
+      
+    }else{
+      this.envio = 30;
+      this.totalCompra = this.subtotalCompra + 30;
+      this.botonesDeshabilitados = false;
+    }
   }
 
+  //obtener carrito para detalle de ordenes------------------------------------------------
+ 
+  cliente: any;
+  carritoConsulta: { productId: string, idRestaurante: string, cantidad: number, especificacion: string }[] = [];
+  obtenerDatoComensal() {
+    console.log('Elementos en el carritoF: ', this.carritoConsulta);
+    if (this.comensalId) {
+      // Llama a la función del servicio para obtener las direcciones desde el backend
+      this.carritoService.obtenerDatoComensal(this.comensalId).subscribe(
+        (data) => {
+          // Actualiza la lista de direcciones con los datos obtenidos
+          this.cliente = data;
 
+          console.log('Datos comensal recibidas', this.cliente);
+
+          // Actualiza la variable carrito con los datos del carrito del comensal
+          this.carritoConsulta = this.cliente.carrito;
+          console.log('Carrito del comensal:', this.carritoConsulta);
+
+          
+        },
+        (error) => {
+          console.error('Error al obtener las direcciones:', error);
+
+          // Maneja el error según sea necesario
+        }
+      );
+
+    } else {
+      console.log('No se esta recibiendo el id del cliente');
+    }
+  }
  
 }

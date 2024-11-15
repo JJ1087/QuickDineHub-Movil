@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
+import { PerfilUsuarioComponent } from '../perfil-usuario/perfil-usuario.component';
 import { CatalogoService, Product } from './catalogo.service';
 import { Preferences } from '@capacitor/preferences';
 
 import {ToastController, LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page implements OnInit{
   @ViewChild('quickview') quickview!: ProductQuickviewComponent;
+  @ViewChild('usuario') usuario!: PerfilUsuarioComponent;
 
   productos: Product[] = [];
   filteredProductos: Product[] = []; // productos filtrados
@@ -26,7 +27,6 @@ export class Tab1Page implements OnInit{
     private catalogoService: CatalogoService,
     private loadingController: LoadingController, // Inyectar el controlador de Loading
     private toastController: ToastController, // Inyectar el controlador de Toast
-    private router: Router
   ) {}
 
 
@@ -71,10 +71,6 @@ export class Tab1Page implements OnInit{
     if (value) {
       this.userName = value;
     }
-  }
-
-  irAPerfilUsuario() {
-    this.router.navigate(['/perfil-usuario']);
   }
   
   //--------------------Obtencion de los productos--------------------

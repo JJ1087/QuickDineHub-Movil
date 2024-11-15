@@ -19,7 +19,7 @@
     <!-- Card del pedido -->
     <div *ngFor="let orden of ordenes1" class="bg-white rounded-lg shadow-md p-4">
       <div class="flex justify-between items-center">
-        <h3 class="text-sm md:text-md font-semibold text-gray-900"> {{ orden.fechaHoraEntrega | date: 'dd/MM/yy' }}</h3>
+        <h3 class="text-sm md:text-md font-semibold text-gray-900"> {{ orden.createdAt | date: 'dd/MM/yy' }}</h3>
         <span class="text-sm md:text-md font-semibold text-[#ff8633]">{{ obtenerEstado(orden.estadoOrden) }}</span>
       </div>
   
@@ -40,7 +40,7 @@
   
       <!-- Total del pedido -->
       <div class="flex justify-between items-center mt-4">
-        <p class="text-sm sm:text-md font-bold">Total: ${{ orden.precioTotal.$numberDecimal }}</p>
+        <p class="text-sm sm:text-md font-bold">Total: ${{ orden.precioTotal.$numberDecimal }} (30 de envío)</p>
       </div>
     </div>
     
