@@ -58,4 +58,9 @@ export class PasarelaService {
     };
     return this.http.put(`${this.apiUrl}/actualizar-carrito`, body);
     }
+
+  verificarFeedbackCliente(idCliente: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/feedbacks/existe/${idCliente}`);
+  }
+
 }

@@ -1,0 +1,59 @@
+<div class="relative z-10" role="dialog" aria-modal="true" *ngIf="isVisible">
+  <!-- Fondo difuminado -->
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
+      <!-- Panel del Modal -->
+      <div class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
+        <div class="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+
+          <div class="w-full">
+            <h2 class="text-2xl font-bold text-gray-900 text-center mb-4">Ayúdanos a mejorar</h2>
+            
+            <!-- Pregunta 1 -->
+            <div class="mb-4">
+              <p class="text-gray-800">¿Consideras que los pasos para completar tu compra fueron claros?</p>
+              <div class="flex flex-wrap justify-center mt-2">
+                <label class="mr-4"><input type="radio" name="claridadCompra" value="totalmente" class="accent-[#ff8633]" (change)="selectAnswer('claridadCompra', 1)"> Totalmente</label>
+                <label class="mr-4"><input type="radio" name="claridadCompra" value="loSuficiente" class="accent-[#ff8633]" (change)="selectAnswer('claridadCompra', 2)"> Lo suficiente</label>
+                <label><input type="radio" name="claridadCompra" value="nadaClaros" class="accent-[#ff8633]" (change)="selectAnswer('claridadCompra', 3)"> Nada claros</label>
+              </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="mb-4">
+              <p class="text-gray-800">¿El diseño de la aplicación te resultó visualmente agradable?</p>
+              <div class="flex flex-wrap justify-center mt-2">
+                <label class="mr-4"><input type="radio" name="disenoAgradable" value="totalmente" class="accent-[#ff8633]" (change)="selectAnswer('disenoAgradable', 1)"> Totalmente</label>
+                <label class="mr-4"><input type="radio" name="disenoAgradable" value="parcialmente" class="accent-[#ff8633]" (change)="selectAnswer('disenoAgradable', 2)"> Parcialmente</label>
+                <label><input type="radio" name="disenoAgradable" value="no" class="accent-[#ff8633]" (change)="selectAnswer('disenoAgradable', 3)"> No</label>
+              </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="mb-4">
+              <p class="text-gray-800">¿Te resultó conveniente el uso de esta aplicación?</p>
+              <div class="flex flex-wrap justify-center mt-2">
+                <label class="mr-4"><input type="radio" name="usoConveniente" value="muyConveniente" class="accent-[#ff8633]" (change)="selectAnswer('usoConveniente', 1)"> Muy conveniente</label>
+                <label class="mr-4"><input type="radio" name="usoConveniente" value="conveniente" class="accent-[#ff8633]" (change)="selectAnswer('usoConveniente', 2)"> Conveniente</label>
+                <label><input type="radio" name="usoConveniente" value="nadaConveniente" class="accent-[#ff8633]" (change)="selectAnswer('usoConveniente', 3)"> Nada conveniente</label>
+              </div>
+            </div>
+
+            <!-- Botón Enviar -->
+            <div class="flex justify-center mt-6">
+              <button 
+                (click)="Evaluar()"
+                [disabled]="botonesDeshabilitados"
+                [ngClass]="{'bg-[#ff8633] hover:bg-[#ff6133]': !botonesDeshabilitados, 'bg-[#ff8633]/50': botonesDeshabilitados}"
+                class="text-white px-4 py-2 rounded font-bold shadow-md w-full sm:w-auto">
+                Enviar
+              </button>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

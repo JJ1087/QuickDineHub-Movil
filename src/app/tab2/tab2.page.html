@@ -65,7 +65,8 @@
   </button>
   
     <!-- Product Quickviews "detalles del producto" -->
-    <app-pasarela-pagos #quickview [totalCompra]="totalCompra" [carritoConsulta]="carritoConsulta" (carritoVaciado)="cargarProductosCarrito()" (carritoVaciado)="obtenerDatoComensal()"></app-pasarela-pagos>
+    <app-pasarela-pagos #quickview [totalCompra]="totalCompra" [carritoConsulta]="carritoConsulta" (carritoVaciado)="cargarProductosCarrito()" (carritoVaciado)="obtenerDatoComensal()" (abrirFeedback)="mostrarModalFeedback()"></app-pasarela-pagos>
+    <app-feedback-formulario #feedback></app-feedback-formulario>
   </div>
   
 

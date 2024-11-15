@@ -9,6 +9,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
 import { PerfilUsuarioComponent } from '../perfil-usuario/perfil-usuario.component';
+//import { FeedbackFormularioComponent } from '../components/feedback-formulario/feedback-formulario.component';
+
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { PerfilUsuarioComponent } from '../perfil-usuario/perfil-usuario.compone
   declarations: [
     Tab1Page,
     ProductQuickviewComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    //FeedbackFormularioComponent
   
   ]
 })
