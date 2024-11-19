@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">QuickDineHub-Movil</string>
     <string name="title_activity_main">QuickDineHub-Movil</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">com.quickdinehub.mobile</string>
+    <string name="custom_url_scheme">com.quickdinehub.mobile</string>
 
     <string name="publishable_key">pk_test_51QJ0RlF5yxkLL8z9meIVjdqFZ5deqRAfyqlY71fA3s2cWW8F2M74aDFiik4HAvuoA7ucgjhilMbPw9OqStYMD67q00ePLjKlCk</string>
     <bool name="enable_google_pay">true</bool>
