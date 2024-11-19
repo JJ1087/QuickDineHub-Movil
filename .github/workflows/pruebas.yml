@@ -57,7 +57,6 @@ jobs:
       # # 8. Ejecutar pruebas e2e con cypress
       # - name: e2e cypress
       #   run: npx cypress run
-
   build:
       name: Build AAB
       runs-on: ubuntu-latest
