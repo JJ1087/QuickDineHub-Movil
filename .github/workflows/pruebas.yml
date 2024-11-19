@@ -59,47 +59,37 @@ jobs:
       #   run: npx cypress run
 
   build:
-    name: Build AAB
     runs-on: ubuntu-latest
-    needs: Pruebas # Solo ejecutarse si el job de Pruebas fue exitoso
-    steps:
-      # 1. Checkout del código
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      # 2. Configurar Java y Android SDK
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'zulu'
+          needs: Pruebas # Este job se ejecutará solo si 'Pruebas' pasa exitosamente
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 33
-          target: android-33
-          build-tools: 33.0.0
+          steps:
+            # 1. Checkout del repositorio
+            - name: Checkout code
+              uses: actions/checkout@v3
 
-      # 3. Construir el artefacto AAB
-      - name: Give gradlew execute permissions
-        run: |
-          cd android
-          chmod +x gradlew
+            # 2. Configurar Node.js
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: "20" # Versión de Node.js recomendada
+                cache: "npm"
 
-      - name: Build AAB
-        run: |
-          cd android
-          ./gradlew clean bundleRelease
-        env:
-          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+            # 3. Instalar dependencias del proyecto
+            - name: Install dependencies
+              run: npm ci
 
-      # 4. Subir el artefacto generadooo
-      - name: Upload AAB
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release.aab
-          path: app/build/outputs/bundle/release/app-release.aab
+            # 4. Instalar Ionic CLI globalmente
+            - name: Install Ionic CLI
+              run: npm install -g @ionic/cli
+
+            # 5. Construir la aplicación con Ionic
+            - name: Build Ionic App
+              run: ionic build
+
+            # 6. Sincronizar Capacitor
+            - name: Synchronize Capacitor
+              run: npx cap sync android
+
+            # 7. Verificar carpeta de Android
+            - name: Check Android Folder
+              run: ls android/
