@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkapp=self.webpackChunkapp||[]).push([[6470],{6470:(M,r,u)=>{u.r(r),u.d(r,{PerfilUsuarioRoutingModule:()=>s});var n=u(691),l=u(9232),i=u(3953);const a=[{path:"",component:l.k}];let s=(()=>{var o;class t{}return(o=t).\u0275fac=function(f){return new(f||o)},o.\u0275mod=i.$C({type:o}),o.\u0275inj=i.G2t({imports:[n.iI.forChild(a),n.iI]}),t})()}}]);
