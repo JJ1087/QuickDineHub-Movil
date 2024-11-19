@@ -84,6 +84,7 @@ jobs:
       # 3. Construir el artefacto AAB
       - name: Build AAB
         run: |
+          cd android
           ./gradlew clean bundleRelease
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
