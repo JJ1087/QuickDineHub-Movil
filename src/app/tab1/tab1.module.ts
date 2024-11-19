@@ -8,6 +8,9 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 import { ProductQuickviewComponent } from '../components/product-quickview/product-quickview.component';
+import { PerfilUsuarioComponent } from '../perfil-usuario/perfil-usuario.component';
+//import { FeedbackFormularioComponent } from '../components/feedback-formulario/feedback-formulario.component';
+
 
 @NgModule({
   imports: [
@@ -19,7 +22,9 @@ import { ProductQuickviewComponent } from '../components/product-quickview/produ
   ],
   declarations: [
     Tab1Page,
-    ProductQuickviewComponent
+    ProductQuickviewComponent,
+    PerfilUsuarioComponent,
+    //FeedbackFormularioComponent
   
   ]
 })

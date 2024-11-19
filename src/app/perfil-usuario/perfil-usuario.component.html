@@ -1,0 +1,45 @@
+<div class="fixed inset-0 z-10 flex items-center justify-center bg-gray-800 bg-opacity-50" *ngIf="isVisible">
+  <!-- Contenido del modal -->
+  <div class="relative w-full max-w-lg h-auto p-6 bg-white rounded-lg shadow-lg overflow-auto sm:max-h-[80%] sm:w-11/12 md:w-3/4 lg:w-1/2">
+    <!-- Botón de cerrar -->
+    <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500" (click)="closeModal()">
+      <span class="sr-only">Cerrar</span>
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Sección de perfil -->
+    <div class="flex flex-col items-center text-center">
+      <!-- Título -->
+      <h2 class="text-2xl font-bold text-gray-900">
+        Tu <span class="font-bold" style="color: #ff8633;">perfil</span>
+      </h2>
+
+      <!-- Foto del usuario -->
+      <img 
+        src="assets/icon/FotoUsuario.jpg" 
+        alt="Fotografía del usuario" 
+        class="w-24 h-24 rounded-full mt-4 border-2 border-gray-300 shadow-md"
+      />
+
+      <!-- Nombre del usuario -->
+      <h3 class="mt-2 text-xl font-semibold text-gray-900">{{userName}}</h3>
+
+      <!-- Opciones de perfil -->
+      <div class="w-full mt-6 space-y-4">
+        <!-- Botón para cerrar sesión centrado -->
+        <button class="w-full text-center text-gray-700 hover:text-[#ff8633] font-medium" (click)="cerrarSesion()">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+
+

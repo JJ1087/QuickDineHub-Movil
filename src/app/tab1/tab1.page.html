@@ -1,14 +1,15 @@
 <ion-content [fullscreen]="true">
-
+    
     <!-- Contenedor del perfil del cliente -->
     <div class="flex items-center space-x-4 p-2 sm:p-4 md:p-6">
       <!-- Imagen de perfil -->
-      <img src="assets/icon/logo-empresa.png" alt="Foto de perfil" class="w-[3.5rem] h-[3.5rem] sm:w-[4.5rem] sm:h-[4.5rem] md:w-[5.5rem] md:h-[5.5rem] rounded-full">
+      <img src="assets/icon/FotoUsuario.jpg" alt="Foto de perfil" (click)="usuario.irAPerfilUsuario()" class="w-[3.5rem] h-[3.5rem] sm:w-[4.5rem] sm:h-[4.5rem] md:w-[5.5rem] md:h-[5.5rem] rounded-full">
       
       <!-- Nombre y usuario del cliente -->
       <div>
-        <h4 class="text-md sm:text-lg md:text-xl font-semibold text-gray-900">QuickDineHub</h4>
+        <h4 class="text-md sm:text-lg md:text-xl font-semibold text-gray-900">{{userName}}</h4>
       </div>
+      <app-perfil-usuario #usuario></app-perfil-usuario>
     </div>
 
      <!-- Contenedor del encabezado -->
@@ -25,7 +26,7 @@
     <div class="px-4 py-2 sm:px-6 md:px-8">
         <!-- Campo de búsqueda -->
         <div class="relative max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
-            <input type="text" placeholder="Buscar..." class="w-full p-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] transition duration-300 ease-in-out" />
+            <input type="text" placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="filterProducts()" class="w-full p-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] transition duration-300 ease-in-out" />
             <!-- Icono de búsqueda -->
             <span class="absolute left-3 top-2.5">
                 <i class="fas fa-search text-gray-500 h-5 w-5"></i>
@@ -33,111 +34,92 @@
         </div>
     </div>
 
-    <!-- Contenedor de filtros de categoría -->
+         <!-- Contenedor de filtros de categoría -->
     <div class="px-4 py-2 sm:px-6 md:px-8">
-        <div class="flex justify-center space-x-2 md:space-x-4">
-            <!-- Filtro "Todo" -->
-            <button class="px-4 py-2 bg-[#ff8633] text-white font-semibold rounded-full hover:bg-[#ff6133] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff8633] transition duration-300 ease-in-out">
-                Todo
-            </button>
-            <!-- Filtro "Postres" -->
-            <button class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition duration-300 ease-in-out">
-                Postres
-            </button>
-            <!-- Filtro "Pastas" -->
-            <button class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-full hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition duration-300 ease-in-out">
-                Pastas
-            </button>
-        </div>
-    </div>
+      <div class="flex justify-center space-x-2 md:space-x-4">
+          <button
+              (click)="aplicarFiltro('Todo')"
+              class="px-4 py-2 font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out"
+              [ngClass]="{
+                  'bg-[#ff8633] text-white hover:bg-[#ff6133] focus:ring-[#ff8633]': selectedFilter === 'Todo',
+                  'bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-300': selectedFilter !== 'Todo'
+              }"
+          >
+              Todo
+          </button>
+          <button
+              (click)="aplicarFiltro('Postres')"
+              class="px-4 py-2 font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out"
+              [ngClass]="{
+                  'bg-[#ff8633] text-white hover:bg-[#ff6133] focus:ring-[#ff8633]': selectedFilter === 'Postres',
+                  'bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-300': selectedFilter !== 'Postres'
+              }"
+          >
+              Postres
+          </button>
+          <button
+              (click)="aplicarFiltro('carnes')"
+              class="px-4 py-2 font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out"
+              [ngClass]="{
+                  'bg-[#ff8633] text-white hover:bg-[#ff6133] focus:ring-[#ff8633]': selectedFilter === 'carnes',
+                  'bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-300': selectedFilter !== 'carnes'
+              }"
+          >
+              Carnes
+          </button>
+          <!-- (click)="feedback.openModal()" -->
+          <!-- <button
+              
+              class="px-4 py-2 font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-300 ease-in-out"
+              [ngClass]="{
+                  'bg-[#ff8633] text-white hover:bg-[#ff6133] focus:ring-[#ff8633]': selectedFilter === 'carnes',
+                  'bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-300': selectedFilter !== 'carnes'
+              }"
+          >
+              Modal
+          </button> -->
+          <!-- <app-feedback-formulario #feedback></app-feedback-formulario> -->
+      </div>
+  </div>
 
-    <!-- Catalogo de productos -->
+
+      <!-- Catalogo de productos -->
     <div class="bg-white">
-        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 class="sr-only">Products</h2>
-      
-          <div class="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            <a class="group relative">
-              <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-01.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full object-cover object-center group-hover:opacity-75">
+      <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 class="sr-only">Products</h2>
+
+        <div class="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          <ng-container *ngFor="let producto of filteredProductos">
+            <a class="group relative bg-white shadow-lg p-4 rounded-lg flex flex-col items-center">
+              <!-- Contenedor cuadrado de la imagen -->
+              <div class="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
+                <img [src]="getImageUrl(producto.imagen[0])" alt="{{producto.nombre}}" class="h-full w-full object-cover group-hover:opacity-75">
               </div>
-              <h3 class="mt-2 text-sm text-gray-700 mb-6">Earthen Bottle</h3>
-              <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
               
-              <!-- Botones en la esquina inferior derecha -->
-              <div class="absolute bottom-2 right-2 flex space-x-1">
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
+              <!-- Nombre del producto -->
+              <h3 class="mt-2 text-sm text-center text-gray-700">{{producto.nombre}}</h3>
+              
+              <!-- Precio del producto -->
+              <p class="mt-1 text-lg font-medium text-gray-900">${{producto.precio.$numberDecimal}}</p>
+              
+              <!-- Contenedor de botones en la parte inferior -->
+              <div class="mt-auto flex space-x-2 pt-4">
+                <button (click)="agregarAlCarrito(producto)" class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]" >
                   <i class="fas fa-shopping-cart"></i>
                 </button>
-                <button (click)="quickview.openModal()" class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
+                <button (click)="quickview.openModal(producto._id)" class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
             </a>
-      
-            <a  class="group relative">
-              <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-02.jpg" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-cover object-center group-hover:opacity-75">
-              </div>
-              <h3 class="mt-2 text-sm text-gray-700 mb-6">Nomad Tumbler</h3>
-              <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-              
-              <!-- Botones en la esquina inferior derecha -->
-              <div class="absolute bottom-2 right-2 flex space-x-1">
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-            </a>
-      
-            <a class="group relative">
-              <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="Person using a pen to cross a task off a productivity paper card." class="h-full w-full object-cover object-center group-hover:opacity-75">
-              </div>
-              <h3 class="mt-2 text-sm text-gray-700 mb-6">Focus Paper Refill</h3>
-              <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
-              
-              <!-- Botones en la esquina inferior derecha -->
-              <div class="absolute bottom-2 right-2 flex space-x-1">
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-            </a>
-      
-            <a class="group relative">
-              <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/category-page-04-image-card-04.jpg" alt="Hand holding black machined steel mechanical pencil with brass tip and top." class="h-full w-full object-cover object-center group-hover:opacity-75">
-              </div>
-              <h3 class="mt-2 text-sm text-gray-700 mb-6">Machined Mechanical Pencil</h3>
-              <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-              
-              <!-- Botones en la esquina inferior derecha -->
-              <div class="absolute bottom-2 right-2 flex space-x-1">
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-                <button class="bg-[#ff8633] text-white px-2 py-1 rounded hover:bg-[#ff6133]">
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-            </a>
+          </ng-container>
+            
             <!-- Product Quickviews "detalles del producto" -->
             <app-product-quickview #quickview></app-product-quickview>
-            <!-- More products... -->
+           
           </div>
         </div>
       </div>
       
-    
-      
-         
-
 </ion-content>
   

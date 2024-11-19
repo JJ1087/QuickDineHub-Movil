@@ -1,0 +1,105 @@
+<div class="relative z-10" role="dialog" aria-modal="true" *ngIf="isVisible">
+  <!-- Fondo difuminado -->
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
+      <!-- Panel del Modal -->
+      <div class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
+        <div class="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+
+          <div class="w-full">
+            <h2 class="text-2xl font-bold text-gray-900 text-center mb-4"> <span class="font-bold" style="color: #ff8633;">Ayúdanos</span> a mejorar</h2>
+            
+            <!-- Pregunta 1 -->
+            <div class="mb-6 text-center">
+              <p class="text-gray-800 mb-2">¿Consideras que los pasos para completar tu compra fueron claros?</p>
+              <div class="flex justify-center mt-2 space-x-4">
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaUno === 3, 'bg-gray-100 hover:bg-gray-200': respuestaUno !== 3}"
+                  (click)="selectAnswer('claridadCompra', 3)">
+                  🤩
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaUno === 2, 'bg-gray-100 hover:bg-gray-200': respuestaUno !== 2}"
+                  (click)="selectAnswer('claridadCompra', 2)">
+                  🙂
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaUno === 1, 'bg-gray-100 hover:bg-gray-200': respuestaUno !== 1}"
+                  (click)="selectAnswer('claridadCompra', 1)">
+                  😞
+                </button>
+              </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="mb-6 text-center">
+              <p class="text-gray-800 mb-2">¿El diseño de la aplicación te resultó visualmente agradable?</p>
+              <div class="flex justify-center mt-2 space-x-4">
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaDos === 3, 'bg-gray-100 hover:bg-gray-200': respuestaDos !== 3}"
+                  (click)="selectAnswer('disenoAgradable', 3)">
+                  🤩
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaDos === 2, 'bg-gray-100 hover:bg-gray-200': respuestaDos !== 2}"
+                  (click)="selectAnswer('disenoAgradable', 2)">
+                  🙂
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaDos === 1, 'bg-gray-100 hover:bg-gray-200': respuestaDos !== 1}"
+                  (click)="selectAnswer('disenoAgradable', 1)">
+                  😞
+                </button>
+              </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="mb-6 text-center">
+              <p class="text-gray-800 mb-2">¿Te resultó conveniente el uso de esta aplicación?</p>
+              <div class="flex justify-center mt-2 space-x-4">
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaTres === 3, 'bg-gray-100 hover:bg-gray-200': respuestaTres !== 3}"
+                  (click)="selectAnswer('usoConveniente', 3)">
+                  🤩
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaTres === 2, 'bg-gray-100 hover:bg-gray-200': respuestaTres !== 2}"
+                  (click)="selectAnswer('usoConveniente', 2)">
+                  🙂
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaTres === 1, 'bg-gray-100 hover:bg-gray-200': respuestaTres !== 1}"
+                  (click)="selectAnswer('usoConveniente', 1)">
+                  😞
+                </button>
+              </div>
+            </div>
+
+            <!-- Botón Enviar -->
+            <div class="flex justify-center mt-6">
+              <button 
+                (click)="Evaluar()"
+                [disabled]="botonesDeshabilitados"
+                [ngClass]="{'bg-[#ff8633] hover:bg-[#ff6133]': !botonesDeshabilitados, 'bg-[#ff8633]/50': botonesDeshabilitados}"
+                class="text-white px-4 py-2 rounded font-bold shadow-md w-full sm:w-auto">
+                Enviar
+              </button>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
