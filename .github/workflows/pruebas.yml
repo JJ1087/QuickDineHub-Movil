@@ -42,9 +42,9 @@ jobs:
         env:
           CI: true
 
-      # 5. Esperar a que el servidor esté arriba
-      - name: Wait for Angular App to be available
-        run: npx wait-on http://localhost:8100
+      # # 5. Esperar a que el servidor esté arriba
+      # - name: Wait for Angular App to be available
+      #   run: npx wait-on http://localhost:8100
 
       # # 6. Ejecutar pruebas unitarias con Jasmin y Karma
       # - name: Run unit test Jasmine karma tests
