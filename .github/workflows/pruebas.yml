@@ -57,41 +57,4 @@ jobs:
       # # 8. Ejecutar pruebas e2e con cypress
       # - name: e2e cypress
       #   run: npx cypress run
-  build:
-      name: Build AAB
-      runs-on: ubuntu-latest
-      needs: tests # Solo ejecutarse si el job de tests fue exitoso
-      steps:
-        # 1. Checkout del código
-        - name: Checkout code
-          uses: actions/checkout@v3
-
-        # 2. Configurar Java y Android SDK
-        - name: Set up JDK
-          uses: actions/setup-java@v3
-          with:
-            java-version: '11'
-
-        - name: Set up Android SDK
-          uses: android-actions/setup-android@v2
-          with:
-            api-level: 33
-            target: android-33
-            build-tools: 33.0.0
-
-        # 3. Construir el artefacto AAB
-        - name: Build AAB
-          run: |
-            ./gradlew clean bundleRelease
-          env:
-            ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-            ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-            ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-            ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-
-        # 4. Subir el artefacto generado
-        - name: Upload AAB
-          uses: actions/upload-artifact@v3
-          with:
-            name: app-release.aab
-            path: app/build/outputs/bundle/release/app-release.aab
+  
