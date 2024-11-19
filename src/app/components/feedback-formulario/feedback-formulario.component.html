@@ -9,35 +9,80 @@
         <div class="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
 
           <div class="w-full">
-            <h2 class="text-2xl font-bold text-gray-900 text-center mb-4">Ayúdanos a mejorar</h2>
+            <h2 class="text-2xl font-bold text-gray-900 text-center mb-4"> <span class="font-bold" style="color: #ff8633;">Ayúdanos</span> a mejorar</h2>
             
             <!-- Pregunta 1 -->
-            <div class="mb-4">
-              <p class="text-gray-800">¿Consideras que los pasos para completar tu compra fueron claros?</p>
-              <div class="flex flex-wrap justify-center mt-2">
-                <label class="mr-4"><input type="radio" name="claridadCompra" value="totalmente" class="accent-[#ff8633]" (change)="selectAnswer('claridadCompra', 1)"> Totalmente</label>
-                <label class="mr-4"><input type="radio" name="claridadCompra" value="loSuficiente" class="accent-[#ff8633]" (change)="selectAnswer('claridadCompra', 2)"> Lo suficiente</label>
-                <label><input type="radio" name="claridadCompra" value="nadaClaros" class="accent-[#ff8633]" (change)="selectAnswer('claridadCompra', 3)"> Nada claros</label>
+            <div class="mb-6 text-center">
+              <p class="text-gray-800 mb-2">¿Consideras que los pasos para completar tu compra fueron claros?</p>
+              <div class="flex justify-center mt-2 space-x-4">
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaUno === 3, 'bg-gray-100 hover:bg-gray-200': respuestaUno !== 3}"
+                  (click)="selectAnswer('claridadCompra', 3)">
+                  🤩
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaUno === 2, 'bg-gray-100 hover:bg-gray-200': respuestaUno !== 2}"
+                  (click)="selectAnswer('claridadCompra', 2)">
+                  🙂
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaUno === 1, 'bg-gray-100 hover:bg-gray-200': respuestaUno !== 1}"
+                  (click)="selectAnswer('claridadCompra', 1)">
+                  😞
+                </button>
               </div>
             </div>
 
             <!-- Pregunta 2 -->
-            <div class="mb-4">
-              <p class="text-gray-800">¿El diseño de la aplicación te resultó visualmente agradable?</p>
-              <div class="flex flex-wrap justify-center mt-2">
-                <label class="mr-4"><input type="radio" name="disenoAgradable" value="totalmente" class="accent-[#ff8633]" (change)="selectAnswer('disenoAgradable', 1)"> Totalmente</label>
-                <label class="mr-4"><input type="radio" name="disenoAgradable" value="parcialmente" class="accent-[#ff8633]" (change)="selectAnswer('disenoAgradable', 2)"> Parcialmente</label>
-                <label><input type="radio" name="disenoAgradable" value="no" class="accent-[#ff8633]" (change)="selectAnswer('disenoAgradable', 3)"> No</label>
+            <div class="mb-6 text-center">
+              <p class="text-gray-800 mb-2">¿El diseño de la aplicación te resultó visualmente agradable?</p>
+              <div class="flex justify-center mt-2 space-x-4">
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaDos === 3, 'bg-gray-100 hover:bg-gray-200': respuestaDos !== 3}"
+                  (click)="selectAnswer('disenoAgradable', 3)">
+                  🤩
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaDos === 2, 'bg-gray-100 hover:bg-gray-200': respuestaDos !== 2}"
+                  (click)="selectAnswer('disenoAgradable', 2)">
+                  🙂
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaDos === 1, 'bg-gray-100 hover:bg-gray-200': respuestaDos !== 1}"
+                  (click)="selectAnswer('disenoAgradable', 1)">
+                  😞
+                </button>
               </div>
             </div>
 
             <!-- Pregunta 3 -->
-            <div class="mb-4">
-              <p class="text-gray-800">¿Te resultó conveniente el uso de esta aplicación?</p>
-              <div class="flex flex-wrap justify-center mt-2">
-                <label class="mr-4"><input type="radio" name="usoConveniente" value="muyConveniente" class="accent-[#ff8633]" (change)="selectAnswer('usoConveniente', 1)"> Muy conveniente</label>
-                <label class="mr-4"><input type="radio" name="usoConveniente" value="conveniente" class="accent-[#ff8633]" (change)="selectAnswer('usoConveniente', 2)"> Conveniente</label>
-                <label><input type="radio" name="usoConveniente" value="nadaConveniente" class="accent-[#ff8633]" (change)="selectAnswer('usoConveniente', 3)"> Nada conveniente</label>
+            <div class="mb-6 text-center">
+              <p class="text-gray-800 mb-2">¿Te resultó conveniente el uso de esta aplicación?</p>
+              <div class="flex justify-center mt-2 space-x-4">
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaTres === 3, 'bg-gray-100 hover:bg-gray-200': respuestaTres !== 3}"
+                  (click)="selectAnswer('usoConveniente', 3)">
+                  🤩
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaTres === 2, 'bg-gray-100 hover:bg-gray-200': respuestaTres !== 2}"
+                  (click)="selectAnswer('usoConveniente', 2)">
+                  🙂
+                </button>
+                <button 
+                  class="text-2xl px-4 py-2 rounded-full"
+                  [ngClass]="{'bg-orange-300': respuestaTres === 1, 'bg-gray-100 hover:bg-gray-200': respuestaTres !== 1}"
+                  (click)="selectAnswer('usoConveniente', 1)">
+                  😞
+                </button>
               </div>
             </div>
 
@@ -57,3 +102,4 @@
     </div>
   </div>
 </div>
+
