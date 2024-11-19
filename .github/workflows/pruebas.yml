@@ -82,6 +82,9 @@ jobs:
           build-tools: 33.0.0
 
       # 3. Construir el artefacto AAB
+      - name: Give gradlew execute permissions
+        run: chmod +x ./gradlew
+        
       - name: Build AAB
         run: |
           cd android
