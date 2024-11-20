@@ -78,3 +78,15 @@ jobs:
       # 3. Instalar dependencias
       - name: Install dependencies
         run: npm ci
+      
+      # 4. Construir la aplicación con Ionic
+      - name: Build Ionic App
+        run: ionic build
+
+      # 5. Copiar archivos al proyecto Android
+      - name: Copy to Android
+        run: ionic cap copy
+
+      # 6. Sincronizar archivos con Capacitor
+      - name: Sync with Capacitor
+        run: ionic cap sync
