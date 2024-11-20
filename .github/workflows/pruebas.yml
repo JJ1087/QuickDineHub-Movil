@@ -134,6 +134,7 @@ jobs:
           name: app-release.aab
           path: android/app/build/outputs/bundle/release/app-release.aab
 
+      #PRUEBA FINAL
       # # 9. Configurar el entorno para Android SDK
       # - name: Set up Android SDK
       #   uses: android-actions/setup-android@v2
