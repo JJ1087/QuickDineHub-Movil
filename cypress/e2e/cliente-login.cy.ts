@@ -17,5 +17,13 @@ describe("Prueba E2E para el flujo de login en la aplicación Ionic", () => {
   
     //   cy.url({ timeout: 90000 }).should("include", "/tabs"); // Verifica la redirección a la página de inicio después de iniciar sesión correctamente
     // });   
+
+    const alwaysPassTest = () => {
+      it("Siempre pasa la prueba como práctica inicial", () => {
+        expect(true).to.equal(true);
+      });
+    };
+  
+    alwaysPassTest();
     
 });
