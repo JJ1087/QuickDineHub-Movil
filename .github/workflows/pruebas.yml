@@ -99,7 +99,7 @@ jobs:
       # 8. Sincronizar archivos con Capacitor
       - name: Sync with Capacitor
         run: ionic cap sync
-        
+
       # 9. Configurar el entorno para Android SDK
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
@@ -111,3 +111,8 @@ jobs:
       # 10. Aceptar las licencias de Android SDK
       - name: Accept Android Licenses
         run: yes | sdkmanager --licenses
+
+      # 11. Construir el archivo .aab
+      - name: Build Android App Bundle (.aab)
+        run: ./gradlew bundleRelease
+        working-directory: android
